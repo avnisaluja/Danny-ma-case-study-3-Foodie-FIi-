@@ -19,6 +19,9 @@ They have oped for first plan
 In addition most of the customers have stopped availing our services.
  customers have upgraded to an annual plan in 2020 is 195
 
-customers downgraded from a pro monthly to a basic monthly plan in 2020 is 0.
+Customers downgraded from a pro monthly to a basic monthly plan in 2020 is 0.
 
- average does it take for a customer to an annual plan from the day they join Foodie-Fi is 104 days.
+ Average does it take for a customer to an annual plan from the day they join Foodie-Fi is 104 days.
+
+Tools used :MYSQL
+Concept covered:Aggregations, Common Table Expression (CTE),Join Clause,Window Functions
