@@ -41,10 +41,10 @@ WITH total_plan_cte AS
           lead(plan_id, 1) over(PARTITION BY customer_id
                                 ORDER BY start_date) AS next_plan,plan_id
    FROM subscriptions )
-   select  next_plan,count(next_plan) ,(select count(distinct customer_id) from subscriptions) as total_count 
+   select  next_plan,count(next_plan) as next_plan_count,round(count(next_plan)*100/(select count(distinct customer_id) from subscriptions),2) as total_count 
    from total_plan_cte
    where plan_id=0
-   group by next_plan;
+group by next_plan;
    
 -- What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31
 WITH latest_plan_cte AS
@@ -53,7 +53,7 @@ WITH latest_plan_cte AS
    FROM subscriptions
    JOIN plans USING (plan_id)
    WHERE start_date <='2020-12-31')
-select count(distinct customer_id) as latest_customers 
+select count(distinct customer_id) as latest_customers_count, round(count(distinct customer_id)/(select count(customer_id) from latest_plan_cte),2) as latest_customers 
 ,plan_id from latest_plan_cte
 where latest_plan=1
 group by plan_id;
