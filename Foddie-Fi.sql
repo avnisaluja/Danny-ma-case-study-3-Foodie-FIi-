@@ -78,16 +78,6 @@ with average as (select customer_id,
    select count(customer_id) as customers_downgraded from average
    where plan_id=2 and next_plan =1;
 
--- How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
-
-with average as (select customer_id,
-          lead(start_date, 1) over(PARTITION BY customer_id
-                                ORDER BY start_date)  AS next_date,plan_id,start_date,
-		   lead(plan_id, 1) over(PARTITION BY customer_id
-                                ORDER BY start_date) AS next_plan
-   from subscriptions )
-select * from average
-where  plan_id=0;
 
 -- How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
 WITH trial_plan_customer_cte AS
